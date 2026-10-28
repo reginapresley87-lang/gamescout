@@ -1,0 +1,5 @@
+shot_*.png
+*.tgz
+*backup*
+*.bak
+__pycache__/

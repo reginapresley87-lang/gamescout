@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,interactive-widget=resizes-content">
+<meta name="theme-color" content="#ffffff">
+<meta name="robots" content="noindex">
+<title>GameScout · chat with Linkabara</title>
+<link rel="icon" href="linkabara/poster.jpg" type="image/jpeg">
+<meta name="description" content="GameScout: describe a game you want and Linkabara, your fluffy game buddy, suggests ideas and links you to real games on Roblox. Fan-made, not affiliated with Roblox.">
+<link rel="preload" href="linkabara/poster.jpg" as="image">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="logo" viewBox="0 0 32 32">
+      <rect x="1" y="1" width="30" height="30" rx="9" fill="#0b8270"/>
+      <circle cx="14.5" cy="14.5" r="6.6" fill="none" stroke="#fff" stroke-width="2.6"/>
+      <path d="M19.4 19.4l5 5" stroke="#fff" stroke-width="2.8" stroke-linecap="round"/>
+      <path d="M14.5 10.8l1.1 2.6 2.6 1.1-2.6 1.1-1.1 2.6-1.1-2.6-2.6-1.1 2.6-1.1z" fill="#ffd36b"/>
+    </symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-side" viewBox="0 0 24 24"><rect x="3.5" y="4.5" width="17" height="15" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M9.5 4.5v15" stroke="currentColor" stroke-width="1.8"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 017-2.6A4 4 0 0119 10c0 5.6-7 10-7 10z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/></symbol>
+    <symbol id="i-send" viewBox="0 0 24 24"><path d="M12 19V6M6.5 11.5L12 6l5.5 5.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-mic" viewBox="0 0 24 24"><rect x="9" y="3.5" width="6" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="1.9"/><path d="M5.5 11a6.5 6.5 0 0013 0M12 17.5V21" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></symbol>
+    <symbol id="i-vol" viewBox="0 0 24 24"><path d="M4 9.5h3.5L12 6v12l-4.5-3.5H4z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path class="w" d="M15.5 9a4 4 0 010 6M18 6.5a7.5 7.5 0 010 11" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-mute" viewBox="0 0 24 24"><path d="M4 9.5h3.5L12 6v12l-4.5-3.5H4z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M16 9.5l5 5M21 9.5l-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24"><path d="M5 5.5h14a1.5 1.5 0 011.5 1.5v8.5A1.5 1.5 0 0119 17H10l-4.5 3.5V17H5a1.5 1.5 0 01-1.5-1.5V7A1.5 1.5 0 015 5.5z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l10.5-6.5z" fill="currentColor"/></symbol>
+    <symbol id="i-trash" viewBox="0 0 24 24"><path d="M5 7h14M10 7V5h4v2M7 7l1 12h8l1-12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  </defs>
+</svg>
+
+<template id="lk-tpl">
+  <div class="lk">
+    <img class="lk-fallback" alt="" data-src="linkabara.png">
+    <video class="v-idle" muted playsinline loop autoplay preload="auto" poster="linkabara/poster.jpg" aria-hidden="true">
+      <source src="linkabara/idle.mp4" type="video/mp4"><source src="linkabara/idle.webm" type="video/webm"></video>
+    <video class="v-talk" muted playsinline loop preload="auto" poster="linkabara/poster.jpg" aria-hidden="true">
+      <source src="linkabara/talk.mp4" type="video/mp4"><source src="linkabara/talk.webm" type="video/webm"></video>
+    <span class="lk-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+  </div>
+</template>
+
+<div class="app" id="app">
+  <aside class="sidebar" id="sidebar" aria-label="Chats">
+    <div class="sb-top">
+      <div class="brand"><svg><use href="#logo"/></svg><span>GameScout</span></div>
+      <button class="icon-btn" id="sbClose" type="button" aria-label="Hide sidebar" title="Hide sidebar"><svg><use href="#i-side"/></svg></button>
+    </div>
+    <button class="new-chat" id="newChat" type="button"><svg><use href="#i-plus"/></svg>New chat</button>
+    <button class="sb-item" id="openSaved" type="button"><svg><use href="#i-heart"/></svg>Saved games<span class="count" id="savedCount">0</span></button>
+    <div class="sb-label">Past chats</div>
+    <nav class="history" id="history"></nav>
+    <div class="sb-foot">
+      <div class="sb-me"><span class="me-dot" id="meDot">?</span><div><b id="meName">Player</b><span>Saved on this device only</span></div></div>
+      <p>Fan-made concept. Not affiliated with Roblox.<br>Designed by dmeneri</p>
+    </div>
+  </aside>
+  <div class="scrim" id="scrim"></div>
+
+  <main class="main">
+    <header class="topbar">
+      <button class="icon-btn" id="sbOpen" type="button" aria-label="Show chats" title="Show chats"><svg><use href="#i-menu"/></svg></button>
+      <div class="tb-title"><div class="lk-slot tb-avatar" data-lk="top"></div><div><b>Linkabara</b><span id="tbStatus">Your game buddy</span></div></div>
+      <div class="tb-actions">
+        <button class="icon-btn" id="voiceBtn" type="button" aria-pressed="false" title="Read replies aloud"><svg><use href="#i-mute"/></svg><span class="sr">Voice replies off</span></button>
+        <button class="icon-btn" id="newChat2" type="button" aria-label="New chat" title="New chat"><svg><use href="#i-plus"/></svg></button>
+      </div>
+    </header>
+
+    <section class="scroll" id="scroll">
+      <div class="col">
+        <div class="welcome" id="welcome">
+          <div class="lk-slot hero-lk" data-lk="hero"></div>
+          <h1 id="welcomeTitle">Hi! I'm Linkabara.</h1>
+          <p class="sub">Tell me what kind of game you feel like playing and I'll suggest a few ideas, then help you find real games like them on Roblox. Or just say hi!</p>
+          <div class="chips" id="chips">
+            <button type="button" class="chip" data-q="A spooky game to play with friends"><span>👻</span>A spooky game to play with friends</button>
+            <button type="button" class="chip" data-q="A cute pet simulator"><span>🐶</span>A cute pet simulator</button>
+            <button type="button" class="chip" data-q="Something chill where I can build"><span>🏗️</span>Something chill where I can build</button>
+            <button type="button" class="chip" data-q="A fast racing game"><span>🏎️</span>A fast racing game</button>
+            <button type="button" class="chip" data-q="Tell me a joke"><span>😄</span>Tell me a joke</button>
+            <button type="button" class="chip" data-q="What can you do?"><span>🧸</span>What can you do?</button>
+          </div>
+        </div>
+        <div class="thread" id="thread" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <footer class="composer-wrap">
+      <form class="composer" id="composer" autocomplete="off">
+        <label class="sr" for="input">Message Linkabara</label>
+        <textarea id="input" rows="1" maxlength="300" placeholder="Describe a game, or just say hi…" enterkeyhint="send"></textarea>
+        <button class="c-btn mic" id="micBtn" type="button" aria-label="Speak your message" title="Speak" hidden><svg><use href="#i-mic"/></svg></button>
+        <button class="c-btn send" id="sendBtn" type="submit" aria-label="Send" disabled><svg><use href="#i-send"/></svg></button>
+      </form>
+      <p class="fine">Cards are example ideas; buttons search real games on Roblox. Fan-made, not affiliated with Roblox. · Designed by dmeneri</p>
+    </footer>
+  </main>
+
+  <!-- game detail + saved games panels -->
+  <div class="panel-scrim" id="panelScrim"></div>
+  <aside class="panel" id="detail" aria-label="Game details" aria-hidden="true"></aside>
+  <aside class="panel" id="saved" aria-label="Saved games" aria-hidden="true"></aside>
+  <div class="toast" id="toast" role="status"></div>
+</div>
+
+<script src="games.js"></script>
+<script src="linkabara-chat.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
